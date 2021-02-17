@@ -72,7 +72,7 @@ def resize_pconv(image):
     wi = 1
     hi = math.ceil(h/256)
     wi = math.ceil(w/256)
-    bias = 0#ここを大きくするとPconvに入力される画像が大きくなるが，大きな領域の修復をする様に学習していないので推奨しない．
+    bias = 2
 
     return hi+bias,wi+bias
         
@@ -444,7 +444,6 @@ class image_gui():
         hi, wi = resize_pconv(img)
         img = cv2.resize(img,(256*wi,256*hi))
         mask = cv2.resize(mask,(256*wi,256*hi))
-        mask = np.where(mask <127,0,255)
 
         cv2.imwrite(mask_path,mask)
         cv2.imwrite(target_path,img)
